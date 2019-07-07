@@ -7,12 +7,34 @@
 
   <body>
   
-    <div id="app">
-      
+    <div class="container pt-5" id="app">
+      <users-list v-bind:users="users"></users-list>
     </div>
+	
+
+	<template id="userListTpl">
+		<div>
+			<button class="btn btn-default" v-on:click="toggleUserList" v-bind:text-content.prop="isShow ? 'Скрыть' : 'Показать'"></button>
+			<table class="table table-border" v-if="isShow">
+				<thead>
+				  <tr><th>ФИО</th><th>E-mail</th><th>Телефон</tr>
+				</thead>
+				<tbody>
+				  <tr v-for="user in users" v-bind:key="user.id">
+					<td>{{ user.name | uppercase }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.phone }}</td>
+					<!--td><img v-bind:src="user.pic || noPic" /></td-->
+				  </tr>
+				</tbody>
+			</table>
+		</div>
+	</template>
     
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="js/app.js"></script>
   </body>
+  
 
 </html>
