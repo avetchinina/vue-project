@@ -7,13 +7,13 @@
 
   <body>
   
-    <div class="container pt-5" id="app">
-      <user-edit v-bind:user="users[0]"></user-edit>
+    <div v-cloak class="container pt-5" id="app">
+      <user-edit v-bind:user="users[0]" v-bind:load="wasLoaded"></user-edit>
     </div>
 	
 	<template id="editFormTpl">
-		<form>
-		<div class="form-group">
+		<form v-if="load && ifUser">
+		  <div class="form-group">
 			<label for="userName">ФИО</label>
 			<input type="text" class="form-control" id="userName" v-bind:value="user.name">
 		  </div>
@@ -27,6 +27,14 @@
 		  </div>
 		  <button type="submit" class="btn btn-primary">Сохранить</button>
 		</form>	
+		<div v-else-if="load" class="alert alert-warning">
+			Пользователь не найден!
+		</div>
+		<div v-else>
+			<div class="spinner-border" role="status">
+			  <span class="sr-only">Загрузка...</span>
+			</div>
+		</div>
 	</template>
     
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>

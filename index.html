@@ -7,28 +7,35 @@
 
   <body>
   
-    <div class="container pt-5" id="app">
-      <users-list v-bind:users="users"></users-list>
-    </div>
-	
+	<div v-cloak id="app" class="container pt-5">
+		<users-list v-if="wasLoaded" v-bind:users="users"></users-list>
+		<div v-else>
+			<div class="spinner-border" role="status">
+			  <span class="sr-only">Загрузка...</span>
+			</div>
+		</div>
+	</div>	
 
 	<template id="userListTpl">
-		<div>
-			<button class="btn btn-default" v-on:click="toggleUserList" v-bind:text-content.prop="isShow ? 'Скрыть' : 'Показать'"></button>
+		<div v-if="haveUsers">
+			<button type="button" class="btn btn-default" v-on:click="toggleUserList">{{ isShow ? 'Скрыть' : 'Показать' }}</button>
 			<table class="table table-border" v-if="isShow">
 				<thead>
 				  <tr><th>ФИО</th><th>E-mail</th><th>Телефон</tr>
 				</thead>
 				<tbody>
 				  <tr v-for="user in users" v-bind:key="user.id">
-					<td>{{ user.name | uppercase }}</td>
+					<td>{{ user.name }}</td>
 					<td>{{ user.email }}</td>
 					<td>{{ user.phone }}</td>
 					<!--td><img v-bind:src="user.pic || noPic" /></td-->
 				  </tr>
 				</tbody>
 			</table>
-		</div>
+		</div>	
+		<div v-else class="alert alert-warning">
+			Нет пользователей!
+		</div>		
 	</template>
     
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
