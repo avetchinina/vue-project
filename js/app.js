@@ -40,7 +40,7 @@ window.vm = new Vue({
 		loadData: function() {
 			var self = this;
 			
-			axios.get('http://jsonplaceholder.typicode.com/users')
+			axios.get('https://jsonplaceholder.typicode.com/users')
 				.then(function(response) {
 					console.log('Данные загружены!');
 					self.users = response.data;
