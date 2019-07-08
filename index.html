@@ -25,7 +25,7 @@
 				</thead>
 				<tbody>
 				  <tr v-for="user in users" v-bind:key="user.id">
-					<td>{{ user.name }}</td>
+					<td>{{ user.name | uppercase }}</td>
 					<td>{{ user.email }}</td>
 					<td>{{ user.phone }}</td>
 					<!--td><img v-bind:src="user.pic || noPic" /></td-->

@@ -21,6 +21,15 @@ var usersList = {
 		this.isShow = !this.isShow;
 	  }
 	},
+	filters: {
+		uppercase: function(str) {
+			if (!str) {
+			  return '';
+			}
+			
+			return str.toUpperCase();
+		}
+	}
 };
 var usersEdit = {
 	template: '#editFormTpl',
@@ -69,15 +78,6 @@ window.vm = new Vue({
 	computed: {
 	  countUsers: function() {
 		return this.users.length;
-	  }
-	},
-	filters: {
-	  uppercase: function(str) {
-		if (!str) {
-		  return '';
-		}
-		
-		return str.toUpperCase();
 	  }
 	},
 	created: function() {
