@@ -7,7 +7,7 @@
       </div>
       <div class="form-group">
         <label for="user-age">Возраст</label>
-        <input type="text" class="form-control" id="user-age" />
+        <input type="number" class="form-control" id="user-age" />
       </div>
       <div class="form-group">
         <label for="user-email">Email</label>

@@ -10,7 +10,7 @@
       "email": "t@domain.ru",
       "company": "YTU",
       "address": "5, Voronin str.",
-      "age": "42",
+      "age": 46,
       "phone": "8-910-989-88-99",
       "accessLevel": "admin",
       "registered": "29.09.2017"

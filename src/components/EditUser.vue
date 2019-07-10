@@ -24,11 +24,10 @@
       <div class="form-group">
         <label for="age">Возраст</label>
         <input
-          type="text"
+          type="number"
           class="form-control"
           id="age"
-          :value="user.age"
-          v-on:input="inputHandler"
+          v-model.number="user.age"
         />
       </div>
       <div class="form-group">
