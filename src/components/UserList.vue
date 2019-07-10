@@ -18,6 +18,7 @@
           <th>Компания</th>
           <th>Адрес</th>
           <th>Баланс</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,15 @@
           <td>{{ user.company | uppercase }}</td>
           <td>{{ user.address }}</td>
           <td>{{ user.balance }}</td>
+          <td>
+            <router-link
+              :to="{ name: 'edit-user', params: { id: user.id } }"
+              type="button"
+              class="btn btn-success"
+            >
+              <span class="mdi mdi-account-edit"></span>
+            </router-link>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -2,8 +2,8 @@
   <div>
     <form>
       <div class="form-group">
-        <label for="user-name">ФИО</label>
-        <input type="text" class="form-control" id="user-name" />
+        <label for="user-first-name">Имя</label>
+        <input type="text" class="form-control" id="user-first-name" />
       </div>
       <div class="form-group">
         <label for="user-age">Возраст</label>
@@ -27,7 +27,7 @@
       </div>
       <div class="form-group">
         <label for="user-balance">Баланс</label>
-        <input type="number" class="form-control" id="user-balance" />
+        <input type="text" class="form-control" id="user-balance" />
       </div>
       <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>

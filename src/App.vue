@@ -31,7 +31,10 @@
         </ul>
       </div>
     </nav>
-    <router-view />
+
+    <section>
+      <router-view />
+    </section>
   </div>
 </template>
 
@@ -42,6 +45,13 @@
 .navbar-brand {
   img {
     max-width: 50px;
+  }
+}
+.nav {
+  .navbar-dark .nav-item &-link {
+    &.router-link-active {
+      color: #fff;
+    }
   }
 }
 </style>

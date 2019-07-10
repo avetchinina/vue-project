@@ -22,6 +22,14 @@ export default new Router({
       path: '/add-user',
       name: 'add-user',
       component: ManageUser
+    },
+    {
+      path: '/edit-user/:id',
+      name: 'edit-user',
+      component: ManageUser,
+      params: {
+        id: 0
+      }
     }
   ]
 })
