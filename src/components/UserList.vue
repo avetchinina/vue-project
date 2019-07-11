@@ -1,9 +1,9 @@
 <template>
-  <div v-if="haveUsers">
+  <div>
     <button
       type="button"
       class="btn btn-primary float-right"
-      v-on:click="toggleUserList"
+      @click="toggleUserList"
     >
       {{ isShow ? 'Скрыть' : 'Показать' }}
     </button>
@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" v-bind:key="user.id">
+        <tr v-for="user in users" :key="user.id">
           <td><img :src="user.picture" class="img-thumbnail" /></td>
           <td>{{ getFullName(user) }}</td>
           <td>{{ user.age }}</td>
@@ -44,16 +44,16 @@
       </tbody>
     </table>
   </div>
-  <div v-else class="alert alert-warning">
-    Нет пользователей!
-  </div>
 </template>
 
 <script>
-import uppercase from '../methods/uppercase'
+import uppercase from '@/methods/uppercase.js'
 
 export default {
   name: 'UserList',
+  filters: {
+    uppercase: uppercase
+  },
   props: {
     users: {
       required: true,
@@ -63,11 +63,6 @@ export default {
   data: () => ({
     isShow: true
   }),
-  computed: {
-    haveUsers: function() {
-      return this.users.length > 0
-    }
-  },
   methods: {
     toggleUserList: function() {
       this.isShow = !this.isShow
@@ -75,14 +70,11 @@ export default {
     getFullName(user) {
       return user.firstName + ' ' + user.lastName
     }
-  },
-  filters: {
-    uppercase: uppercase
   }
 }
 </script>
 
-<style scoped="less">
+<style lang="less">
 .table {
   .img-thumbnail {
     max-width: 60px;
