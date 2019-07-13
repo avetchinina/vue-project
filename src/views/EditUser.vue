@@ -1,19 +1,22 @@
 <template>
   <div class="container">
-    <manage-user v-if="user" :user="user"></manage-user>
+    <form v-if="user" @submit.prevent="sendUser">
+      <user-form :user="user" @input="value => (user = value)"></user-form>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
     <bootstrap-spinner v-else></bootstrap-spinner>
   </div>
 </template>
 
 <script>
-import ManageUser from '@/components/ManageUser.vue'
+import UserForm from '@/components/UserForm.vue'
 import axios from 'axios'
 import BootstrapSpinner from '@/components/BootstrapSpinner.vue'
 
 export default {
   name: 'EditUser',
   components: {
-    ManageUser,
+    UserForm,
     BootstrapSpinner
   },
   data: () => ({

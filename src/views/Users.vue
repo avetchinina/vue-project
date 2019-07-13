@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <user-list v-if="wasLoaded && haveUsers" :users="users"></user-list>
+    <user-list
+      v-if="wasLoaded && haveUsers"
+      :users="users"
+      @change-users="value => (users = value)"
+    ></user-list>
     <div v-else-if="wasLoaded" class="alert alert-warning">
       Пользователи не найдены!
     </div>

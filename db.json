@@ -1,21 +1,6 @@
 {
   "users": [
     {
-      "id": 0,
-      "isActive": true,
-      "balance": "$3,237.52",
-      "picture": "http://placehold.it/128x128",
-      "firstName": "Nikolay",
-      "lastName": "Stepin",
-      "email": "t@domain.ru",
-      "company": "YTU",
-      "address": "Ivanovo, 80, Voronin str.",
-      "age": 46,
-      "phone": "8-910-989-88-99",
-      "accessLevel": "admin",
-      "registered": "29.09.2017"
-    },
-    {
       "id": 1,
       "isActive": true,
       "balance": "$3,237.52",
@@ -30,22 +15,6 @@
       "address": "703 Stillwell Avenue, Wawona, Northern Mariana Islands, 8236",
       "about": "Ad eu non labore dolore elit cillum anim officia consequat qui ea. Adipisicing deserunt fugiat eu veniam. Sit anim eu magna duis ea dolore labore Lorem. Ea fugiat velit sint elit nisi deserunt veniam. Dolore non commodo nisi esse do eu exercitation officia do consectetur. Qui esse in minim adipisicing officia. Ullamco id eu minim consectetur consectetur.",
       "registered": "29.09.2017"
-    },
-    {
-      "id": 2,
-      "isActive": false,
-      "balance": "$2,330.64",
-      "picture": "http://placehold.it/128x128",
-      "age": 38,
-      "accessLevel": "user",
-      "firstName": "Knox",
-      "lastName": "Hernandez",
-      "company": "GEOFORMA",
-      "email": "knox.hernandez@geoforma.biz",
-      "phone": "+7 (812) 463-2697",
-      "address": "718 Buffalo Avenue, Hanover, American Samoa, 9133",
-      "about": "Fugiat nostrud dolore sunt ad aliquip. Aliquip et nostrud voluptate mollit voluptate sint officia laborum elit veniam voluptate. Occaecat adipisicing ad voluptate ea eu aute.",
-      "registered": "31.07.2016"
     },
     {
       "id": 3,
