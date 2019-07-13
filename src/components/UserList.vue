@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in localUsers" :key="user.id">
+        <tr v-for="user in filteredUsers" :key="user.id">
           <td><img :src="user.picture" class="img-thumbnail" /></td>
           <td>{{ getFullName(user) }}</td>
           <td>{{ user.age }}</td>
@@ -48,6 +48,16 @@
         </tr>
       </tbody>
     </table>
+    <ul class="pagination">
+      <li
+        v-for="num in pageCount"
+        :key="num"
+        class="page-item"
+        :class="{ active: num === currentPage }"
+      >
+        <a class="page-link" :data-href="num" @click="changePage">{{ num }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -64,17 +74,30 @@ export default {
     users: {
       required: true,
       type: Array
+    },
+    size: {
+      type: Number,
+      default: 5
     }
   },
   data: () => ({
     isShow: true,
-    localUsers: null
+    localUsers: null,
+    currentPage: 1
   }),
+  computed: {
+    pageCount() {
+      return Math.round(this.localUsers.length / this.size)
+    },
+    filteredUsers() {
+      let startPos = (this.currentPage - 1) * this.size
+      return this.localUsers.slice(startPos, startPos + this.size)
+    }
+  },
   watch: {
     localUsers: {
       deep: true,
       handler() {
-        console.log(this.localUsers)
         this.$emit('change-users', this.localUsers)
       }
     }
@@ -92,6 +115,9 @@ export default {
     deleteUser(id) {
       axios.delete('http://localhost:3000/users/' + id)
       this.localUsers = this.localUsers.filter(user => user.id !== id)
+    },
+    changePage(event) {
+      this.currentPage = +event.target.dataset.href
     }
   }
 }
