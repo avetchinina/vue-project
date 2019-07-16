@@ -10,7 +10,7 @@
         </li>
       </ul>
       <form @submit.prevent="sendUser">
-        <user-form :value="user" @input="value => (user = value)"></user-form>
+        <user-form v-model="user"></user-form>
         <button type="submit" class="btn btn-primary">Сохранить</button>
       </form>
     </div>

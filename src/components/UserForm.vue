@@ -75,7 +75,7 @@
 </template>
 
 <script>
-// import isEqual from 'lodash.isequal'
+import isEqual from 'lodash.isequal'
 
 export default {
   name: 'UserForm',
@@ -89,18 +89,20 @@ export default {
     localUser: null
   }),
   watch: {
-    // user: {
-    //   deep: true,
-    //   handler() {
-    //     if (isEqual(this.localUser, this.user)) {
-    //       this.$emit('update', Object.assign({}, this.localUser))
-    //     }
-    //   }
-    // },
+    value: {
+      deep: true,
+      handler() {
+        if (!isEqual(this.localUser, this.value)) {
+          this.localUser = Object.assign({}, this.value)
+        }
+      }
+    },
     localUser: {
       deep: true,
       handler() {
-        this.$emit('input', this.localUser)
+        if (!isEqual(this.localUser, this.value)) {
+          this.$emit('input', this.localUser)
+        }
       }
     }
   },
