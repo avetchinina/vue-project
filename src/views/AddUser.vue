@@ -24,8 +24,11 @@ export default {
     sendUser() {
       axios
         .post(this.url, this.user)
-        .then(() => {
-          this.$router.push('/users')
+        .then(response => {
+          this.$router.push({
+            name: 'edit-user',
+            params: { id: response.user.id }
+          })
         })
         .catch(err => console.log(err))
     }

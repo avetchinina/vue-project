@@ -226,7 +226,7 @@
     },
     {
       "id": 16,
-      "isActive": true,
+      "isActive": false,
       "balance": "$2,142.74",
       "picture": "http://placehold.it/128x128",
       "age": 22,

@@ -55,12 +55,28 @@
       />
     </div>
     <div class="form-group">
+      <label for="access-level">Уровень доступа</label>
+      <select
+        id="access-level"
+        class="form-control"
+        v-model="localUser.accessLevel"
+      >
+        <option>admin</option>
+        <option>user</option>
+        <option>guest</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="address">Адрес</label>
       <textarea
         class="form-control"
         id="address"
         v-model="localUser.address"
       ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="address">Дата регистрации</label>
+      <Calendar v-model="localUser.registered"></Calendar>
     </div>
     <div class="form-group">
       <label for="balance">Баланс</label>
@@ -71,14 +87,29 @@
         v-model="localUser.balance"
       />
     </div>
+    <div class="form-group form-check">
+      <label class="form-check-label" for="is-active">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="is-active"
+          v-model="localUser.isActive"
+        />
+        {{ localUser.isActive ? 'Активен' : 'Не активен' }}
+      </label>
+    </div>
   </div>
 </template>
 
 <script>
 import isEqual from 'lodash.isequal'
+import Calendar from '@/plugins/Calendar.vue'
 
 export default {
   name: 'UserForm',
+  components: {
+    Calendar
+  },
   props: {
     value: {
       type: Object,
