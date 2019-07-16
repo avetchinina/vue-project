@@ -75,10 +75,12 @@
 </template>
 
 <script>
+// import isEqual from 'lodash.isequal'
+
 export default {
   name: 'UserForm',
   props: {
-    user: {
+    value: {
       type: Object,
       required: true
     }
@@ -87,6 +89,14 @@ export default {
     localUser: null
   }),
   watch: {
+    // user: {
+    //   deep: true,
+    //   handler() {
+    //     if (isEqual(this.localUser, this.user)) {
+    //       this.$emit('update', Object.assign({}, this.localUser))
+    //     }
+    //   }
+    // },
     localUser: {
       deep: true,
       handler() {
@@ -95,7 +105,7 @@ export default {
     }
   },
   created() {
-    this.localUser = Object.assign({}, this.user)
+    this.localUser = Object.assign({}, this.value)
   }
 }
 </script>

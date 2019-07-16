@@ -1,11 +1,26 @@
 <template>
   <div class="container">
-    <form v-if="user" @submit.prevent="sendUser">
-      <user-form :user="user" @input="value => (user = value)"></user-form>
-      <button type="submit" class="btn btn-primary">Сохранить</button>
-    </form>
-    <div class="alert alert-warning" v-else>
-      Пользователь не найден!
+    <div v-if="user">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" @click="changeUser(userId - 1)">Предыдущий</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" @click="changeUser(userId + 1)">Следующий</a>
+        </li>
+      </ul>
+      <form @submit.prevent="sendUser">
+        <user-form :value="user" @input="value => (user = value)"></user-form>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+      </form>
+    </div>
+    <div v-else>
+      <div class="alert alert-warning">
+        Пользователь не найден!
+      </div>
+      <router-link class="btn btn-info" tag="button" to="/users">
+        Перейти к списку пользователей
+      </router-link>
     </div>
   </div>
 </template>
@@ -24,7 +39,7 @@ export default {
   }),
   computed: {
     userId() {
-      return this.$route.params.id
+      return +this.$route.params.id
     },
     url() {
       return 'http://localhost:3000/users/' + this.userId
@@ -50,6 +65,10 @@ export default {
           this.$router.push('/users')
         })
         .catch(err => console.log(err))
+    },
+    changeUser(id) {
+      this.$router.push({ name: 'edit-user', params: { id: id } })
+      this.loadUser()
     }
   }
 }
