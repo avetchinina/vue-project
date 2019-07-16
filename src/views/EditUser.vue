@@ -4,20 +4,20 @@
       <user-form :user="user" @input="value => (user = value)"></user-form>
       <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
-    <bootstrap-spinner v-else></bootstrap-spinner>
+    <div class="alert alert-warning" v-else>
+      Пользователь не найден!
+    </div>
   </div>
 </template>
 
 <script>
 import UserForm from '@/components/UserForm.vue'
 import axios from 'axios'
-import BootstrapSpinner from '@/components/BootstrapSpinner.vue'
 
 export default {
   name: 'EditUser',
   components: {
-    UserForm,
-    BootstrapSpinner
+    UserForm
   },
   data: () => ({
     user: null
@@ -46,7 +46,9 @@ export default {
     sendUser() {
       axios
         .put(this.url, this.user)
-        .then(response => console.log(response))
+        .then(() => {
+          this.$router.push('/users')
+        })
         .catch(err => console.log(err))
     }
   }

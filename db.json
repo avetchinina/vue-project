@@ -305,20 +305,20 @@
       "registered": "11.11.2017"
     },
     {
-      "id": 21,
-      "isActive": false,
-      "balance": "$1,167.27",
+      "firstName": "Alex",
+      "isActive": true,
+      "lastName": "Kropotov",
       "picture": "http://placehold.it/128x128",
-      "age": 37,
-      "accessLevel": "guest",
-      "firstName": "Roy",
-      "lastName": "Gutierrez",
-      "company": "RETROTEX",
-      "email": "roy.gutierrez@retrotex.ca",
-      "phone": "+7 (974) 534-3621",
-      "address": "642 Friel Place, Guilford, Palau, 7221",
-      "about": "Anim tempor quis tempor eu ullamco cupidatat. Ea sint ad sint dolore aute qui tempor tempor mollit minim reprehenderit eiusmod ad in. Nulla labore sit tempor minim et laborum minim nisi et laborum.",
-      "registered": "27.08.2017"
+      "age": 31,
+      "accessLevel": "user",
+      "email": "ttr@domain.ru",
+      "company": "Neurosoft",
+      "balance": "$3,237.52",
+      "id": 21,
+      "phone": "+7 (955) 547-3744",
+      "address": "732 Jewel Street, Beaulieu",
+      "about": "Nostrud eu veniam ea cupidatat duis aliquip ipsum mollit dolore proident laborum excepteur veniam quis. Esse anim sit veniam laborum irure. Minim aute sint elit tempor officia culpa sit ad culpa cupidatat esse laborum. Minim eu aliquip voluptate magna laboris id nisi velit. Eu deserunt est reprehenderit voluptate nulla labore ex voluptate cillum. Sit velit ipsum aliqua laboris consequat labore minim. Adipisicing id ad reprehenderit sunt voluptate anim ea aliquip sunt.",
+      "registered": "11.11.2017"
     }
   ]
 }

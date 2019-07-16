@@ -17,18 +17,16 @@ export default {
     UserForm
   },
   data: () => ({
-    user: {}
+    user: null,
+    url: 'http://localhost:3000/users/'
   }),
-  computed: {
-    url() {
-      return 'http://localhost:3000/users/'
-    }
-  },
   methods: {
     sendUser() {
       axios
         .post(this.url, this.user)
-        .then(response => console.log(response))
+        .then(() => {
+          this.$router.push('/users')
+        })
         .catch(err => console.log(err))
     }
   }

@@ -18,25 +18,33 @@
 
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/users">
-              Список пользователей
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/add-user">
-              Добавить пользователя
-            </router-link>
-          </li>
+          <router-link class="nav-item" tag="li" to="/users">
+            <a class="nav-link">Список пользователей</a>
+          </router-link>
+          <router-link class="nav-item" tag="li" to="/add-user">
+            <a class="nav-link">Добавить пользователя</a>
+          </router-link>
         </ul>
       </div>
     </nav>
 
     <section>
+      <back-button></back-button>
       <router-view />
     </section>
   </div>
 </template>
+
+<script>
+import BackButton from '@/components/BackButton.vue'
+
+export default {
+  name: 'AddUser',
+  components: {
+    BackButton
+  }
+}
+</script>
 
 <style lang="less">
 #app {
@@ -45,13 +53,6 @@
 .navbar-brand {
   img {
     max-width: 50px;
-  }
-}
-.nav {
-  .navbar-dark .nav-item &-link {
-    &.router-link-active {
-      color: #fff;
-    }
   }
 }
 </style>

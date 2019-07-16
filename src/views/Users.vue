@@ -1,14 +1,10 @@
 <template>
   <div class="container">
-    <user-list
-      v-if="wasLoaded && haveUsers"
-      :users="users"
-      @change-users="value => (users = value)"
-    ></user-list>
-    <div v-else-if="wasLoaded" class="alert alert-warning">
+    <bootstrap-spinner v-if="!wasLoaded"></bootstrap-spinner>
+    <div v-else-if="!haveUsers" class="alert alert-warning">
       Пользователи не найдены!
     </div>
-    <bootstrap-spinner v-else></bootstrap-spinner>
+    <user-list v-else :users="users" @delete-user="deleteUser"></user-list>
   </div>
 </template>
 
@@ -28,7 +24,7 @@ export default {
     wasLoaded: false
   }),
   computed: {
-    haveUsers: function() {
+    haveUsers() {
       return this.users.length > 0
     }
   },
@@ -47,6 +43,14 @@ export default {
         .catch(err => console.error(err))
         .finally(() => {
           this.wasLoaded = true
+        })
+    },
+    deleteUser(id) {
+      axios
+        .delete('http://localhost:3000/users/' + id)
+        .catch(err => console.error(err))
+        .finally(() => {
+          this.users = this.users.filter(user => user.id !== id)
         })
     }
   }

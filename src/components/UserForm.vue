@@ -6,8 +6,7 @@
         type="text"
         class="form-control"
         id="firstName"
-        :value="localUser.firstName"
-        @input="inputHandler"
+        v-model="localUser.firstName"
       />
     </div>
     <div class="form-group">
@@ -16,8 +15,7 @@
         type="text"
         class="form-control"
         id="lastName"
-        :value="localUser.lastName"
-        @input="inputHandler"
+        v-model="localUser.lastName"
       />
     </div>
     <div class="form-group">
@@ -35,8 +33,7 @@
         type="email"
         class="form-control"
         id="email"
-        :value="localUser.email"
-        @input="inputHandler"
+        v-model="localUser.email"
       />
     </div>
     <div class="form-group">
@@ -45,8 +42,7 @@
         type="phone"
         class="form-control"
         id="phone"
-        :value="localUser.phone"
-        @input="inputHandler"
+        v-model="localUser.phone"
       />
     </div>
     <div class="form-group">
@@ -100,11 +96,6 @@ export default {
   },
   created() {
     this.localUser = Object.assign({}, this.user)
-  },
-  methods: {
-    inputHandler($event) {
-      this.localUser[$event.target.getAttribute('id')] = $event.target.value
-    }
   }
 }
 </script>
