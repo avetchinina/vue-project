@@ -1,17 +1,23 @@
 <template>
   <div class="row">
     <ul class="pagination col-6">
+      <li class="page-item" :class="{ disabled: currentPage == 1 }">
+        <a class="page-link" @click="changePage(currentPage - 1)">Назад</a>
+      </li>
       <li
         v-for="num in pageCount"
         :key="num"
         class="page-item"
         :class="{ active: num === currentPage }"
       >
-        <a class="page-link" :data-href="num" @click="changePage">{{ num }}</a>
+        <a class="page-link" @click="changePage(num)">{{ num }}</a>
+      </li>
+      <li class="page-item" :class="{ disabled: currentPage == pageCount }">
+        <a class="page-link" @click="changePage(currentPage + 1)">Вперед</a>
       </li>
     </ul>
     <div class="input-group mb-4 input-group-sm offset-4 col-2">
-      <input type="number" class="form-control" v-model.lazy="size" />
+      <input type="number" class="form-control" v-model.lazy.number="size" />
       <div class="input-group-append">
         <span class="input-group-text">Количество</span>
       </div>
@@ -48,8 +54,11 @@ export default {
         this.$emit('input', this.usersPart)
       }
     },
-    size() {
-      this.updateUsersPart()
+    startPos: {
+      deep: true,
+      handler() {
+        this.updateUsersPart()
+      }
     }
   },
   mounted() {
@@ -62,10 +71,15 @@ export default {
         this.startPos + this.size
       )
     },
-    changePage(event) {
-      this.currentPage = +event.target.dataset.href
-      this.updateUsersPart()
+    changePage(page) {
+      this.currentPage = +page
     }
   }
 }
 </script>
+
+<style lang="less">
+.page-item {
+  cursor: pointer;
+}
+</style>
