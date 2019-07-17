@@ -17,7 +17,14 @@
       </li>
     </ul>
     <div class="input-group mb-4 input-group-sm offset-4 col-2">
-      <input type="number" class="form-control" v-model.lazy.number="size" />
+      <select id="page-size" class="form-control" v-model.lazy.number="size">
+        <option>5</option>
+        <option>10</option>
+        <option>15</option>
+        <option>20</option>
+        <option>30</option>
+        <option>50</option>
+      </select>
       <div class="input-group-append">
         <span class="input-group-text">Количество</span>
       </div>
@@ -41,7 +48,7 @@ export default {
   }),
   computed: {
     pageCount() {
-      return Math.round(this.users.length / this.size)
+      return Math.max(Math.round(this.users.length / this.size), 1)
     },
     startPos() {
       return (this.currentPage - 1) * this.size

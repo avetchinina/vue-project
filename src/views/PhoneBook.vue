@@ -4,7 +4,20 @@
     <div v-else-if="!userCount" class="alert alert-warning">
       Пользователи не найдены!
     </div>
-    <user-list v-else :users="users" @delete-user="deleteUser"></user-list>
+    <user-list v-else :users="users">
+      <template slot="table-head">
+        <th>№</th>
+        <th>ФИО</th>
+        <th>E-mail</th>
+        <th>Телефон</th>
+      </template>
+      <template slot="table-row" slot-scope="{ item, getFullName }">
+        <th>{{ item.id }}</th>
+        <td>{{ getFullName(item) }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.phone }}</td>
+      </template>
+    </user-list>
   </div>
 </template>
 
@@ -12,7 +25,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'Users',
+  name: 'PhoneBook',
   components: {
     UserList: () => import('@/components/UserList.vue'),
     BootstrapSpinner: () => import('@/components/BootstrapSpinner.vue')
@@ -41,14 +54,6 @@ export default {
         .catch(err => console.error(err))
         .finally(() => {
           this.wasLoaded = true
-        })
-    },
-    deleteUser(id) {
-      axios
-        .delete('http://localhost:3000/users/' + id)
-        .catch(err => console.error(err))
-        .finally(() => {
-          this.users = this.users.filter(user => user.id !== id)
         })
     }
   }
