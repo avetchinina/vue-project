@@ -103,12 +103,11 @@
 
 <script>
 import isEqual from 'lodash.isequal'
-import Calendar from '@/plugins/Calendar.vue'
 
 export default {
   name: 'UserForm',
   components: {
-    Calendar
+    Calendar: () => import('@/plugins/Calendar.vue')
   },
   props: {
     value: {
