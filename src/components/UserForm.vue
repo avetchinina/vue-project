@@ -87,6 +87,10 @@
         v-model="localUser.balance"
       />
     </div>
+    <div class="form-group">
+      <label for="address">Биография</label>
+      <vue-editor v-model="localUser.about"></vue-editor>
+    </div>
     <div class="form-group form-check">
       <label class="form-check-label" for="is-active">
         <input
@@ -103,11 +107,13 @@
 
 <script>
 import isEqual from 'lodash.isequal'
+import { VueEditor } from 'vue2-editor'
 
 export default {
   name: 'UserForm',
   components: {
-    Calendar: () => import('@/plugins/Calendar.vue')
+    Calendar: () => import('@/plugins/Calendar.vue'),
+    VueEditor: VueEditor
   },
   props: {
     value: {

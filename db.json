@@ -29,7 +29,7 @@
       "email": "mays.sexton@exospeed.info",
       "phone": "+7 (854) 495-3893",
       "address": "420 Bergen Street, Fairhaven, Nevada, 6820",
-      "about": "Lorem ullamco laboris reprehenderit non ut commodo amet. Aliqua qui incididunt tempor et. Amet et magna voluptate ut enim irure esse proident irure proident. Exercitation reprehenderit ut velit fugiat. Aute eu anim nisi voluptate. Aute deserunt laboris qui sunt velit. Fugiat id ut ipsum sint.",
+      "about": "<p>Lorem ullamco laboris reprehenderit non ut commodo amet.<strong> Aliqua qui incididunt tempor et.</strong> Amet et magna voluptate ut enim irure esse proident irure proident. Exercitation reprehenderit ut velit fugiat. Aute eu anim nisi voluptate. Aute deserunt laboris qui sunt velit. </p><p><span style=\"color: rgb(230, 0, 0);\">Fugiat id ut ipsum sint.</span></p>",
       "registered": "25.02.2019"
     },
     {
