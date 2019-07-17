@@ -5,9 +5,15 @@
       <input
         type="text"
         class="form-control"
+        name="firstName"
         id="firstName"
         v-model="localUser.firstName"
+        v-validate="'required'"
+        :class="{ 'is-invalid': errors.has('firstName') }"
       />
+      <span v-show="errors.has('firstName')" class="help-block text-danger">
+        {{ errors.first('firstName') }}
+      </span>
     </div>
     <div class="form-group">
       <label for="lastName">Фамилия</label>
@@ -24,8 +30,14 @@
         type="number"
         class="form-control"
         id="age"
+        name="age"
         v-model.number="localUser.age"
+        v-validate="{ numeric: true, min: 1, max: 199 }"
+        :class="{ 'is-invalid': errors.has('age') }"
       />
+      <span v-show="errors.has('age')" class="help-block text-danger">
+        {{ errors.first('age') }}
+      </span>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
@@ -33,8 +45,14 @@
         type="email"
         class="form-control"
         id="email"
+        name="email"
         v-model="localUser.email"
+        v-validate="'required|email'"
+        :class="{ 'is-invalid': errors.has('email') }"
       />
+      <span v-show="errors.has('email')" class="help-block text-danger">
+        {{ errors.first('email') }}
+      </span>
     </div>
     <div class="form-group">
       <label for="phone">Телефон</label>
@@ -111,6 +129,7 @@ import { VueEditor } from 'vue2-editor'
 
 export default {
   name: 'UserForm',
+  inject: ['$validator'],
   components: {
     Calendar: () => import('@/plugins/Calendar.vue'),
     VueEditor: VueEditor

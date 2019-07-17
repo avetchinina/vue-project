@@ -4,6 +4,9 @@ import router from '@/router.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@mdi/font/css/materialdesignicons.min.css'
 
+import VeeValidate from 'vee-validate'
+Vue.use(VeeValidate)
+
 Vue.config.productionTip = false
 
 new Vue({

@@ -59,6 +59,11 @@ export default {
         .catch(err => console.log(err))
     },
     sendUser() {
+      this.$validator.validateAll()
+      if (this.errors.any()) {
+        alert('Заполните все поля корректно')
+        return
+      }
       axios
         .put(this.url, this.user)
         .then(() => {

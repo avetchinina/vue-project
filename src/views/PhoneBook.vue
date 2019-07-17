@@ -5,13 +5,13 @@
       Пользователи не найдены!
     </div>
     <user-list v-else :users="users">
-      <template slot="table-head">
+      <template v-slot:table-head>
         <th>№</th>
         <th>ФИО</th>
         <th>E-mail</th>
         <th>Телефон</th>
       </template>
-      <template slot="table-row" slot-scope="{ item, getFullName }">
+      <template v-slot:table-row="{ item, getFullName }">
         <th>{{ item.id }}</th>
         <td>{{ getFullName(item) }}</td>
         <td>{{ item.email }}</td>
