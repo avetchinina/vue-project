@@ -94,13 +94,13 @@
     </div>
     <div class="form-group">
       <label for="address">Дата регистрации</label>
-      <input
-        type="text"
-        class="form-control"
-        id="registered"
-        v-model="localUser.registered"
-      />
-      <!--      <Calendar v-model="localUser.registered"></Calendar>-->
+      <!--      <input-->
+      <!--        type="text"-->
+      <!--        class="form-control"-->
+      <!--        id="registered"-->
+      <!--        v-model="localUser.registered"-->
+      <!--      />-->
+      <Calendar v-model="localUser.registered"></Calendar>
     </div>
     <div class="form-group">
       <label for="balance">Баланс</label>
@@ -137,7 +137,7 @@ export default {
   name: 'UserForm',
   inject: ['$validator'],
   components: {
-    // Calendar: () => import('@/plugins/Calendar.vue'),
+    Calendar: () => import('@/plugins/Calendar.vue'),
     VueEditor: VueEditor
   },
   props: {
