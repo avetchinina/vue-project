@@ -3,10 +3,10 @@
     <div v-if="user">
       <ul class="pagination justify-content-center">
         <li class="page-item">
-          <a class="page-link" @click="changeUser(userId - 1)">Предыдущий</a>
+          <a class="page-link" @click.prevent="prevUser">Предыдущий</a>
         </li>
         <li class="page-item">
-          <a class="page-link" @click="changeUser(userId + 1)">Следующий</a>
+          <a class="page-link" @click.prevent="nextUser">Следующий</a>
         </li>
       </ul>
       <form @submit.prevent="sendUser">
@@ -39,7 +39,7 @@ export default {
   }),
   computed: {
     userId() {
-      return +this.$route.params.id
+      return parseInt(this.$route.params.id)
     },
     url() {
       return 'http://localhost:3000/users/' + this.userId
@@ -74,6 +74,12 @@ export default {
     changeUser(id) {
       this.$router.push({ name: 'edit-user', params: { id: id } })
       this.loadUser()
+    },
+    nextUser() {
+      this.changeUser(this.userId + 1)
+    },
+    prevUser() {
+      this.changeUser(this.userId - 1)
     }
   }
 }

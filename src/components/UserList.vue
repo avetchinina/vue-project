@@ -24,7 +24,7 @@
             <td>{{ user.age }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.phone }}</td>
-            <td>{{ user.company | uppercase }}</td>
+            <td>{{ user.company }}</td>
             <td>{{ user.address }}</td>
             <td>{{ user.balance }}</td>
             <td>
@@ -39,7 +39,7 @@
                 <button
                   type="button"
                   class="btn btn-danger"
-                  @click="$emit('delete-user', user.id)"
+                  @click="clickDeleteBtn(user.id)"
                 >
                   <span class="mdi mdi-delete"></span>
                 </button>
@@ -54,16 +54,12 @@
 </template>
 
 <script>
-import uppercase from '@/methods/uppercase.js'
 import Paginator from '@/components/Paginator.vue'
 
 export default {
   name: 'UserList',
   components: {
     Paginator
-  },
-  filters: {
-    uppercase: uppercase
   },
   props: {
     users: {
@@ -77,6 +73,9 @@ export default {
   methods: {
     getFullName(user) {
       return user.firstName + ' ' + user.lastName
+    },
+    clickDeleteBtn(id) {
+      this.$emit('delete-user', id)
     }
   }
 }

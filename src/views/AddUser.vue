@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form @submit.prevent="sendUser">
-      <user-form :user="user" @input="value => (user = value)"></user-form>
+      <user-form v-model="user"></user-form>
       <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
   </div>
@@ -24,13 +24,14 @@ export default {
     sendUser() {
       axios
         .post(this.url, this.user)
-        .then(response => {
-          this.$router.push({
-            name: 'edit-user',
-            params: { id: response.user.id }
-          })
-        })
+        .then(response => this.goToEditUser(response.user.id))
         .catch(err => console.log(err))
+    },
+    goToEditUser(id) {
+      this.$router.push({
+        name: 'edit-user',
+        params: { id: id }
+      })
     }
   }
 }

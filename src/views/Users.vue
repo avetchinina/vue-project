@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <bootstrap-spinner v-if="!wasLoaded"></bootstrap-spinner>
-    <div v-else-if="!userCount" class="alert alert-warning">
+    <bootstrap-spinner v-if="loading"></bootstrap-spinner>
+    <div v-else-if="!haveUsers" class="alert alert-warning">
       Пользователи не найдены!
     </div>
     <user-list v-else :users="users" @delete-user="deleteUser"></user-list>
@@ -19,11 +19,11 @@ export default {
   },
   data: () => ({
     users: null,
-    wasLoaded: false
+    loading: true
   }),
   computed: {
-    userCount() {
-      return this.users.length
+    haveUsers() {
+      return this.users.length > 0
     }
   },
   mounted() {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     loadUsers() {
-      this.wasLoaded = false
+      this.loading = true
       axios
         .get('http://localhost:3000/users')
         .then(response => response.data)
@@ -40,16 +40,17 @@ export default {
         })
         .catch(err => console.error(err))
         .finally(() => {
-          this.wasLoaded = true
+          this.loading = false
         })
     },
     deleteUser(id) {
       axios
         .delete('http://localhost:3000/users/' + id)
+        .then(() => this.removeUserFromList(id))
         .catch(err => console.error(err))
-        .finally(() => {
-          this.users = this.users.filter(user => user.id !== id)
-        })
+    },
+    removeUserFromList(id) {
+      this.users = this.users.filter(user => user.id !== id)
     }
   }
 }

@@ -8,7 +8,7 @@
         name="firstName"
         id="firstName"
         v-model="localUser.firstName"
-        v-validate="'required'"
+        v-validate="{ required: true }"
         :class="{ 'is-invalid': errors.has('firstName') }"
       />
       <span v-show="errors.has('firstName')" class="help-block text-danger">
@@ -47,7 +47,7 @@
         id="email"
         name="email"
         v-model="localUser.email"
-        v-validate="'required|email'"
+        v-validate="{ required: true, email: true }"
         :class="{ 'is-invalid': errors.has('email') }"
       />
       <span v-show="errors.has('email')" class="help-block text-danger">
@@ -94,7 +94,13 @@
     </div>
     <div class="form-group">
       <label for="address">Дата регистрации</label>
-      <Calendar v-model="localUser.registered"></Calendar>
+      <input
+        type="text"
+        class="form-control"
+        id="registered"
+        v-model="localUser.registered"
+      />
+      <!--      <Calendar v-model="localUser.registered"></Calendar>-->
     </div>
     <div class="form-group">
       <label for="balance">Баланс</label>
@@ -131,7 +137,7 @@ export default {
   name: 'UserForm',
   inject: ['$validator'],
   components: {
-    Calendar: () => import('@/plugins/Calendar.vue'),
+    // Calendar: () => import('@/plugins/Calendar.vue'),
     VueEditor: VueEditor
   },
   props: {
