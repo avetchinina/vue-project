@@ -246,14 +246,14 @@
       "balance": "$3,576.37",
       "picture": "http://placehold.it/128x128",
       "age": 32,
-      "accessLevel": "guest",
+      "accessLevel": "admin",
       "firstName": "Moran",
       "lastName": "Puckett",
       "company": "SUSTENZA",
       "email": "moran.puckett@sustenza.biz",
       "phone": "+7 (876) 501-3257",
       "address": "294 Evergreen Avenue, Moscow, Puerto Rico, 6904",
-      "about": "Ipsum id ipsum nulla culpa irure ea adipisicing consequat elit duis esse. Incididunt dolor in do labore commodo magna ut et. Deserunt et aliquip duis non officia duis non anim cillum quis. Et sit reprehenderit culpa aliqua aliqua consectetur. Aliquip est exercitation amet irure ullamco elit do et esse ex.",
+      "about": "<p>Ipsum id ipsum nulla culpa irure ea adipisicing consequat elit duis esse. Incididunt dolor in do labore commodo magna ut et. Deserunt et aliquip duis non officia duis non anim cillum quis. Et sit reprehenderit culpa aliqua aliqua consectetur. Aliquip est exercitation amet irure ullamco elit do et esse ex.</p>",
       "registered": "28.06.2018"
     },
     {
@@ -301,22 +301,6 @@
       "email": "garcia.wood@slambda.io",
       "phone": "+7 (955) 547-3744",
       "address": "732 Jewel Street, Beaulieu, Nebraska, 6105",
-      "about": "Nostrud eu veniam ea cupidatat duis aliquip ipsum mollit dolore proident laborum excepteur veniam quis. Esse anim sit veniam laborum irure. Minim aute sint elit tempor officia culpa sit ad culpa cupidatat esse laborum. Minim eu aliquip voluptate magna laboris id nisi velit. Eu deserunt est reprehenderit voluptate nulla labore ex voluptate cillum. Sit velit ipsum aliqua laboris consequat labore minim. Adipisicing id ad reprehenderit sunt voluptate anim ea aliquip sunt.",
-      "registered": "11.11.2017"
-    },
-    {
-      "firstName": "Alex",
-      "isActive": true,
-      "lastName": "Kropotov",
-      "picture": "http://placehold.it/128x128",
-      "age": 31,
-      "accessLevel": "user",
-      "email": "ttr@domain.ru",
-      "company": "Neurosoft",
-      "balance": "$3,237.52",
-      "id": 21,
-      "phone": "+7 (955) 547-3744",
-      "address": "732 Jewel Street, Beaulieu",
       "about": "Nostrud eu veniam ea cupidatat duis aliquip ipsum mollit dolore proident laborum excepteur veniam quis. Esse anim sit veniam laborum irure. Minim aute sint elit tempor officia culpa sit ad culpa cupidatat esse laborum. Minim eu aliquip voluptate magna laboris id nisi velit. Eu deserunt est reprehenderit voluptate nulla labore ex voluptate cillum. Sit velit ipsum aliqua laboris consequat labore minim. Adipisicing id ad reprehenderit sunt voluptate anim ea aliquip sunt.",
       "registered": "11.11.2017"
     }

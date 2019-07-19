@@ -79,9 +79,7 @@
         class="form-control"
         v-model="localUser.accessLevel"
       >
-        <option>admin</option>
-        <option>user</option>
-        <option>guest</option>
+        <option v-for="opt in accessList" :key="opt">{{ opt }}</option>
       </select>
     </div>
     <div class="form-group">
@@ -94,12 +92,6 @@
     </div>
     <div class="form-group">
       <label for="address">Дата регистрации</label>
-      <!--      <input-->
-      <!--        type="text"-->
-      <!--        class="form-control"-->
-      <!--        id="registered"-->
-      <!--        v-model="localUser.registered"-->
-      <!--      />-->
       <Calendar v-model="localUser.registered"></Calendar>
     </div>
     <div class="form-group">
@@ -135,40 +127,44 @@ import { VueEditor } from 'vue2-editor'
 
 export default {
   name: 'UserForm',
-  inject: ['$validator'],
   components: {
     Calendar: () => import('@/plugins/Calendar.vue'),
     VueEditor: VueEditor
   },
+  model: {
+    prop: 'user'
+  },
+  inject: ['$validator'],
   props: {
-    value: {
+    user: {
       type: Object,
       required: true
     }
   },
   data: () => ({
-    localUser: null
+    localUser: null,
+    accessList: ['admin', 'user', 'guest']
   }),
   watch: {
-    value: {
+    user: {
       deep: true,
       handler() {
-        if (!isEqual(this.localUser, this.value)) {
-          this.localUser = Object.assign({}, this.value)
+        if (!isEqual(this.localUser, this.user)) {
+          this.localUser = Object.assign({}, this.user)
         }
       }
     },
     localUser: {
       deep: true,
       handler() {
-        if (!isEqual(this.localUser, this.value)) {
+        if (!isEqual(this.localUser, this.user)) {
           this.$emit('input', this.localUser)
         }
       }
     }
   },
   created() {
-    this.localUser = Object.assign({}, this.value)
+    this.localUser = Object.assign({}, this.user)
   }
 }
 </script>

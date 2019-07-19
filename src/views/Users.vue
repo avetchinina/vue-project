@@ -1,10 +1,14 @@
 <template>
   <div class="container">
-    <bootstrap-spinner v-if="loading"></bootstrap-spinner>
-    <div v-else-if="!haveUsers" class="alert alert-warning">
+    <div v-if="!haveUsers" class="alert alert-warning">
       Пользователи не найдены!
     </div>
-    <user-list v-else :users="users" @delete-user="deleteUser"></user-list>
+    <user-list
+      v-else
+      :users-count="usersCount"
+      :url="'http://localhost:3000/users/'"
+    >
+    </user-list>
   </div>
 </template>
 
@@ -14,43 +18,27 @@ import axios from 'axios'
 export default {
   name: 'Users',
   components: {
-    UserList: () => import('@/components/UserList.vue'),
-    BootstrapSpinner: () => import('@/components/BootstrapSpinner.vue')
+    UserList: () => import('@/components/UserList.vue')
   },
   data: () => ({
-    users: null,
-    loading: true
+    usersCount: null
   }),
   computed: {
     haveUsers() {
-      return this.users.length > 0
+      return this.usersCount > 0
     }
   },
   mounted() {
-    this.loadUsers()
+    this.getUsersCount()
   },
   methods: {
-    loadUsers() {
-      this.loading = true
+    getUsersCount() {
       axios
         .get('http://localhost:3000/users')
-        .then(response => response.data)
-        .then(users => {
-          this.users = users
+        .then(response => {
+          this.usersCount = response.data.length
         })
         .catch(err => console.error(err))
-        .finally(() => {
-          this.loading = false
-        })
-    },
-    deleteUser(id) {
-      axios
-        .delete('http://localhost:3000/users/' + id)
-        .then(() => this.removeUserFromList(id))
-        .catch(err => console.error(err))
-    },
-    removeUserFromList(id) {
-      this.users = this.users.filter(user => user.id !== id)
     }
   }
 }

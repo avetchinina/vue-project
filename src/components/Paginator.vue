@@ -1,85 +1,59 @@
 <template>
-  <div class="row">
-    <ul class="pagination col-6">
-      <li class="page-item" :class="{ disabled: currentPage == 1 }">
-        <a class="page-link" @click="changePage(currentPage - 1)">Назад</a>
-      </li>
-      <li
-        v-for="num in pageCount"
-        :key="num"
-        class="page-item"
-        :class="{ active: num === currentPage }"
-      >
-        <a class="page-link" @click="changePage(num)">{{ num }}</a>
-      </li>
-      <li class="page-item" :class="{ disabled: currentPage == pageCount }">
-        <a class="page-link" @click="changePage(currentPage + 1)">Вперед</a>
-      </li>
-    </ul>
-    <div class="input-group mb-4 input-group-sm offset-4 col-2">
-      <select id="page-size" class="form-control" v-model.lazy.number="size">
-        <option>5</option>
-        <option>10</option>
-        <option>15</option>
-        <option>20</option>
-        <option>30</option>
-        <option>50</option>
-      </select>
-      <div class="input-group-append">
-        <span class="input-group-text">Количество</span>
-      </div>
-    </div>
-  </div>
+  <ul class="pagination col-6">
+    <li class="page-item" :class="{ disabled: page === 1 }">
+      <a class="page-link" @click.prevent="prevPage">Назад</a>
+    </li>
+    <li
+      v-for="num in pageCount"
+      :key="num"
+      class="page-item"
+      :class="{ active: num === page }"
+    >
+      <a class="page-link" @click.prevent="changePage(num)">{{ num }}</a>
+    </li>
+    <li class="page-item" :class="{ disabled: page === pageCount }">
+      <a class="page-link" @click.prevent="nextPage">Вперед</a>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
   name: 'Paginator',
+  model: {
+    prop: 'page'
+  },
   props: {
-    users: {
-      type: Array,
+    total: {
+      type: Number,
       required: true
+    },
+    perPage: {
+      type: Number,
+      default: 5
+    },
+    page: {
+      type: Number,
+      default: 1
     }
   },
-  data: () => ({
-    usersPart: null,
-    size: 5,
-    currentPage: 1
-  }),
   computed: {
     pageCount() {
-      return Math.max(Math.round(this.users.length / this.size), 1)
-    },
-    startPos() {
-      return (this.currentPage - 1) * this.size
-    }
-  },
-  watch: {
-    usersPart: {
-      deep: true,
-      handler() {
-        this.$emit('input', this.usersPart)
-      }
-    },
-    startPos: {
-      deep: true,
-      handler() {
-        this.updateUsersPart()
-      }
+      return Math.max(Math.round(this.total / this.perPage), 1)
     }
   },
   mounted() {
-    this.updateUsersPart()
+    this.$emit('change-page', this.page)
   },
   methods: {
-    updateUsersPart() {
-      this.usersPart = this.users.slice(
-        this.startPos,
-        this.startPos + this.size
-      )
-    },
     changePage(page) {
-      this.currentPage = +page
+      this.$emit('input', parseInt(page))
+    },
+    prevPage() {
+      this.changePage(this.page - 1)
+    },
+    nextPage() {
+      this.changePage(this.page + 1)
     }
   }
 }

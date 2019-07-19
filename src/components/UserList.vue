@@ -17,7 +17,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in partUsers" :key="user.id">
+        <bootstrap-spinner v-if="loading"></bootstrap-spinner>
+        <tr v-else v-for="user in usersPart" :key="user.id">
           <slot name="table-row" :item="user" :getFullName="getFullName">
             <td><img :src="user.picture" class="img-thumbnail" /></td>
             <td>{{ getFullName(user) }}</td>
@@ -49,33 +50,89 @@
         </tr>
       </tbody>
     </table>
-    <paginator :users="users" @input="value => (partUsers = value)"></paginator>
+    <div class="row">
+      <paginator
+        :total="usersCount"
+        :per-page="perPage"
+        v-model="currentPage"
+      ></paginator>
+      <count-per-page v-model.number="perPage"></count-per-page>
+    </div>
   </div>
 </template>
 
 <script>
-import Paginator from '@/components/Paginator.vue'
+import axios from 'axios'
 
 export default {
   name: 'UserList',
   components: {
-    Paginator
+    Paginator: () => import('@/components/Paginator.vue'),
+    BootstrapSpinner: () => import('@/components/BootstrapSpinner.vue'),
+    CountPerPage: () => import('@/components/CountPerPage.vue')
   },
   props: {
-    users: {
-      type: Array,
+    usersCount: {
+      type: Number,
+      required: true
+    },
+    url: {
+      type: String,
       required: true
     }
   },
   data: () => ({
-    partUsers: null
+    usersPart: [],
+    currentPage: 1,
+    perPage: 5,
+    loading: true
   }),
+  computed: {
+    startPos() {
+      return (this.currentPage - 1) * this.perPage
+    }
+  },
+  watch: {
+    currentPage() {
+      this.loadUsers()
+    },
+    perPage() {
+      this.currentPage = 1
+    }
+  },
+  mounted() {
+    this.loadUsers()
+  },
   methods: {
     getFullName(user) {
       return user.firstName + ' ' + user.lastName
     },
     clickDeleteBtn(id) {
-      this.$emit('delete-user', id)
+      this.deleteUser(id)
+    },
+    loadUsers() {
+      this.loading = true
+      axios
+        .get(this.url, {
+          params: {
+            _start: this.startPos,
+            _end: this.startPos + this.perPage
+          }
+        })
+        .then(response => response.data)
+        .then(users => {
+          this.usersPart = users
+        })
+        .catch(err => console.error(err))
+        .finally(() => {
+          this.loading = false
+        })
+    },
+    deleteUser(id) {
+      axios
+        .delete(this.url + id)
+        .then(() => this.loadUsers())
+        .catch(err => console.error(err))
     }
   }
 }
